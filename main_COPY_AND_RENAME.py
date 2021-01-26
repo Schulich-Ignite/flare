@@ -23,6 +23,7 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        
 
 
     """
@@ -30,13 +31,12 @@ while True:
     """
     
 
-    
+
     """
     DRAW section - make everything show up on screen
     """
     screen.fill(BLACK)  # Fill the screen with one colour
     
-
 
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
