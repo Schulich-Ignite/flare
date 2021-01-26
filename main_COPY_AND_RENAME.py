@@ -3,7 +3,7 @@ import os
 import pygame
 
 """
-SETUP section
+SETUP section - preparing everything before the main loop runs
 """
 pygame.init()
 
