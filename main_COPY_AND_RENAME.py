@@ -3,7 +3,7 @@ import os
 import pygame
 
 """
-SETUP section
+SETUP section - preparing everything before the main loop runs
 """
 pygame.init()
 
@@ -15,30 +15,43 @@ FRAME_RATE = 40
 
 BLACK = (0, 0, 0)
 
-while True:
-    """
-    EVENTS section - how the code reacts when users do things
-    """
+# Main loop
+def main():
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        
+        handle_event(event)
+
+    update()
+    draw()
+    clock.tick(FRAME_RATE)  # Pause the clock to maintain 40 frames per second
 
 
-    """
-    UPDATE section - manipulate everything on the screen
-    """
-    
+"""
+EVENTS section - how the code reacts when users do things
+"""
+def handle_event(event):
+    if event.type == pygame.QUIT:
+        pygame.quit()
+        sys.exit()
 
 
-    """
-    DRAW section - make everything show up on screen
-    """
+"""
+UPDATE section - manipulate everything on the screen
+"""
+def update():
+    pass
+
+
+"""
+DRAW section - make everything show up on screen
+"""
+def draw():
     screen.fill(BLACK)  # Fill the screen with one colour
     
 
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
-    clock.tick(FRAME_RATE)  # Pause the clock to maintain 40 frames per second
-    
+
+
+# Run everything on repeat after setting up
+while True:
+    main()
