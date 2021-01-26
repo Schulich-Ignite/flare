@@ -38,7 +38,7 @@ def handle_event(event):
 UPDATE section - manipulate everything on the screen
 """
 def update():
-    pass
+    pass  # pass simply skips this function. Replace this line with code
 
 
 """
