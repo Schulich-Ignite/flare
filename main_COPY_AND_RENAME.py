@@ -18,6 +18,7 @@ WHITE = (255, 255, 255)
 
 # Creating the screen and the clock
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen.set_alpha(0)  # Make alpha bits transparent
 clock = pygame.time.Clock()
 
 while True:
@@ -25,7 +26,7 @@ while True:
     EVENTS section - how the code reacts when users do things
     """
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: # When user clicks the 'x' on the window, close our game
+        if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
             pygame.quit()
             sys.exit()
         
