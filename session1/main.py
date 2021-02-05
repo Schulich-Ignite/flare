@@ -40,7 +40,7 @@ while True:
     UPDATE section - manipulate everything on the screen
     """
     
-    # Move our rectangle's x and y position by it's corresponding x and y speeds
+    # Move our rectangle's x and y position by its corresponding x and y speeds
     rect.x += rect_speed_x
     rect.y += rect_speed_y
 
