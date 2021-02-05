@@ -20,7 +20,7 @@ WHITE = (255, 255, 255)
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
-# Create our 50 x 100 rectangle surface at x = 0, y = 0
+# Create our 50 x 100 rectangle at x = 0, y = 0
 rect = pygame.Rect(0, 0, 50, 100)
 rect_speed_x = 7
 rect_speed_y = 5
@@ -30,7 +30,7 @@ while True:
     EVENTS section - how the code reacts when users do things
     """
     for event in pygame.event.get():
-        if event.type == pygame.QUIT: # When user clicks the 'x' on the window, close our game
+        if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
             pygame.quit()
             sys.exit()
         
@@ -57,7 +57,7 @@ while True:
     """
     screen.fill(BLACK)  # Fill the screen with one colour
     
-    pygame.draw.rect(screen, WHITE, rect) # Draw our rectangle to the screen in white
+    pygame.draw.rect(screen, WHITE, rect)  # Draw our rectangle to the screen in white
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
