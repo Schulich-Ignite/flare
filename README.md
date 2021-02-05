@@ -7,7 +7,7 @@ Sessions will be using Python with pygame. Our sessions will be using [Visual St
 Check out our [Session 0 slides](https://docs.google.com/presentation/d/1-yf7U3LDF0sc8tgJZaxS8VUkwvxR3vT4y2cX98w1RIo/edit?usp=sharing) for instructions on how to install everything you'll need for our sessions.
 
 ## main.py
-We will be using our [main.py](main_COPY_AND_RENAME.py) file as a template for all the projects in Ignite Flare. Make sure you **save this file** and keep it in a safe spot, as we will be copying it and using it a few times. This holds some pre-written code that is standard for any project using pygame. You won't need to understand how it works, but we encourage you to try your best to learn how it works anyway! **You must have pygame installed first to use this file. See Session 0 [](https://docs.google.com/presentation/d/1-yf7U3LDF0sc8tgJZaxS8VUkwvxR3vT4y2cX98w1RIo/edit?usp=sharing) for instructions.**
+We will be using our [main.py](main_COPY_AND_RENAME.py) file as a template for all the projects in Ignite Flare. Make sure you **save this file** and keep it in a safe spot, as we will be copying it and using it a few times. This holds some pre-written code that is standard for any project using pygame. You won't need to understand how it works, but we encourage you to try your best to learn how it works anyway! **You must have pygame installed first to use this file. See [Session 0](https://docs.google.com/presentation/d/1-yf7U3LDF0sc8tgJZaxS8VUkwvxR3vT4y2cX98w1RIo/edit?usp=sharing) for instructions.**
 
 ### Saving main.py on your computer
 Unfortunately, GitHub does not offer a simple way to download this file. Instead you must save the contents yourself, by doing the following:
