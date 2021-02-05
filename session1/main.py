@@ -18,6 +18,7 @@ WHITE = (255, 255, 255)
 
 # Creating the screen and the clock
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen.set_alpha(0)  # Make alpha bits transparent
 clock = pygame.time.Clock()
 
 # Create our 50 x 100 rectangle at x = 0, y = 0
