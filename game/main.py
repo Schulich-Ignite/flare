@@ -52,10 +52,6 @@ while True:
     UPDATE section - manipulate everything on the screen
     """
     
-    # SESSION 2 - One simple way to make platforms slowly travel left
-    # Commented out for ease of game development
-    # for platform in platforms:
-    #     platform.rect.x -= 1
 
 
     """
