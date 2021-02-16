@@ -1,3 +1,5 @@
+# Created by Schulich Ignite Flare and students of Schulich Ignite
+
 import sys
 import os
 import pygame
