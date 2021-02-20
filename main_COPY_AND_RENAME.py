@@ -50,7 +50,7 @@ while True:
         # Returns (x, y) coordinates as tuple
 
     if mouse_buttons[2]:  # If right mouse pressed
-
+        # Replace this line
 
     """
     UPDATE section - manipulate everything on the screen
