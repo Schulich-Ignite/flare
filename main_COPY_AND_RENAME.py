@@ -42,8 +42,8 @@ while True:
         pass  # Replace this line
 
     # Mouse events
-    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse
-                                        # Returns (x, y) coordinates as tuple
+    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
+    # (x, y) coordinate
 
     mouse_buttons = pygame.mouse.get_pressed()
     if mouse_buttons[0]:  # If left mouse pressed
