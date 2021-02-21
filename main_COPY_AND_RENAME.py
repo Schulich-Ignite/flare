@@ -29,7 +29,28 @@ while True:
         if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
             pygame.quit()
             sys.exit()
-        
+
+    # Keyboard events
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_UP]:
+        pass  # Replace this line
+    if keys_pressed[pygame.K_LEFT]:
+        pass  # Replace this line
+    if keys_pressed[pygame.K_RIGHT]:
+        pass  # Replace this line
+    if keys_pressed[pygame.K_DOWN]:
+        pass  # Replace this line
+
+    # Mouse events
+    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
+    # (x, y) coordinate
+
+    mouse_buttons = pygame.mouse.get_pressed()
+    if mouse_buttons[0]:  # If left mouse pressed
+        pass  # Replace this line
+    if mouse_buttons[2]:  # If right mouse pressed
+        pass  # Replace this line
+
 
 
     """
@@ -42,9 +63,9 @@ while True:
     DRAW section - make everything show up on screen
     """
     screen.fill(BLACK)  # Fill the screen with one colour
-    
+
 
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
-    
+
