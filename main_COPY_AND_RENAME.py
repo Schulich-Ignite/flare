@@ -68,3 +68,4 @@ while True:
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
+
