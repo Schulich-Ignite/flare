@@ -38,7 +38,6 @@ add_platform(100, 500, 200, 50, (50, 100, 255))
 add_platform(650, 450, 200, 50, (50, 100, 255))
 
 player = Player(400, 500)
-player_speed = 5
 
 while True:
     """
@@ -49,24 +48,26 @@ while True:
             pygame.quit()
             sys.exit()
         
+    # Keyboard events
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
-        player.move(0, -player_speed)
-    elif keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
-        player.move(-player_speed, 0)
-    elif keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
-        player.move(0, player_speed)
-    elif keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
-        player.move(player_speed, 0)
+        player.move(0, -player.move_speed)
+    if keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
+        player.move(-player.move_speed, 0)
+    if keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
+        player.move(player.move_speed, 0)
+    if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
+        player.move(0, player.move_speed)
+
+    # Mouse events
+    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
+    # (x, y) coordinate
 
     mouse_buttons = pygame.mouse.get_pressed()
-    if mouse_buttons[0]:  # Left button pressed
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        player.teleport(mouse_x, mouse_y)
-    elif mouse_buttons[1]:  # Scroll wheel pressed
-        pass
-    elif mouse_buttons[2]:  # Right button pressed
-        pass
+    if mouse_buttons[0]:  # If left mouse pressed
+        player.teleport(mouse_pos[0], mouse_pos[1])
+    if mouse_buttons[2]:  # If right mouse pressed
+        pass  # Replace this line
 
     """
     UPDATE section - manipulate everything on the screen
