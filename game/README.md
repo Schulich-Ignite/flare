@@ -14,5 +14,5 @@ N/A
 Basic platforms have been added in. A fundamental for any platformer game.
 
 ## Session 3 - Starting Your Player
-Created a player that can move around with arrow keys, and can teleport to wherever you click.
+Created a player that can move around with arrow keys and teleport to wherever you click.
 For now, the player can walk straight through walls, we'll address that later.
