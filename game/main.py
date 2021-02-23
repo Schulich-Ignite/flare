@@ -4,6 +4,7 @@ import sys
 import os
 import pygame
 from platform import Platform
+from player import Player
 
 """
 SETUP section - preparing everything before the main loop runs
@@ -36,6 +37,7 @@ add_platform(300, 600, 350, 50, (100, 255, 100))
 add_platform(100, 500, 200, 50, (50, 100, 255))
 add_platform(650, 450, 200, 50, (50, 100, 255))
 
+player = Player(400, 500)
 
 while True:
     """
@@ -46,7 +48,26 @@ while True:
             pygame.quit()
             sys.exit()
         
+    # Keyboard events
+    keys_pressed = pygame.key.get_pressed()
+    if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
+        player.move(0, -player.move_speed)
+    if keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
+        player.move(-player.move_speed, 0)
+    if keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
+        player.move(player.move_speed, 0)
+    if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
+        player.move(0, player.move_speed)
 
+    # Mouse events
+    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
+    # (x, y) coordinate
+
+    mouse_buttons = pygame.mouse.get_pressed()
+    if mouse_buttons[0]:  # If left mouse pressed
+        player.teleport(mouse_pos[0], mouse_pos[1])
+    if mouse_buttons[2]:  # If right mouse pressed
+        pass  # Replace this line
 
     """
     UPDATE section - manipulate everything on the screen
@@ -61,6 +82,8 @@ while True:
     
     for platform in platforms:
         pygame.draw.rect(screen, platform.color, platform.rect)
+
+    pygame.draw.rect(screen, player.color, player.rect)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
