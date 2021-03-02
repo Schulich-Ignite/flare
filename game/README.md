@@ -16,3 +16,6 @@ Basic platforms have been added in. A fundamental for any platformer game.
 ## Session 3 - Starting Your Player
 Created a player that can move around with the arrow keys and teleport to wherever you click.
 For now, the player can walk straight through walls, we'll address that later.
+
+## Session 4 - Updating the Player
+Replaced the player created in Session 3 with a player that inherits from the Pygame [sprite](https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite) class.
