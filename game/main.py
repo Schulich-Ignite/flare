@@ -37,7 +37,10 @@ add_platform(300, 600, 350, 50, (100, 255, 100))
 add_platform(100, 500, 200, 50, (50, 100, 255))
 add_platform(650, 450, 200, 50, (50, 100, 255))
 
+# Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
+players = pygame.sprite.Group()
+players.add(player)
 
 while True:
     """
@@ -73,7 +76,7 @@ while True:
     UPDATE section - manipulate everything on the screen
     """
     
-
+    players.update()
 
     """
     DRAW section - make everything show up on screen
@@ -83,7 +86,7 @@ while True:
     for platform in platforms:
         pygame.draw.rect(screen, platform.color, platform.rect)
 
-    pygame.draw.rect(screen, player.color, player.rect)
+    players.draw(screen)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
