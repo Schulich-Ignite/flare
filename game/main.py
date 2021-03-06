@@ -36,6 +36,7 @@ def add_platform(x, y, width, height):
 add_platform(300, 600, 350, 50)
 add_platform(100, 500, 200, 50)
 add_platform(650, 450, 200, 50)
+add_platform(700, 650, 200, 25)
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
