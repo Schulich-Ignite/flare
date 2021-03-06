@@ -24,7 +24,7 @@ class Platform(pygame.sprite.Sprite):
         
     def create_image(self, image_location, width, height):
         """
-        Create the image for this sprite by using one base image and tiling it.
+        Create the image for this sprite by using one base image and tiling it horizontally. Note that vertical tiling has not been implemented.
 
         Args:
             image_location: A string representing the file location for the image
