@@ -25,17 +25,17 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 screen.set_alpha(0)  # Make alpha bits transparent
 clock = pygame.time.Clock()
 
-# List of platforms
-platforms = []
+# Platforms sprite group
+platforms = pygame.sprite.Group()
 
 # Add a platform to the platforms list
-def add_platform(x, y, width, height, color):
-    p = Platform(x, y, width, height, color)
-    platforms.append(p)
+def add_platform(x, y, width, height):
+    p = Platform(x, y, width, height)
+    platforms.add(p)
 
-add_platform(300, 600, 350, 50, (100, 255, 100))
-add_platform(100, 500, 200, 50, (50, 100, 255))
-add_platform(650, 450, 200, 50, (50, 100, 255))
+add_platform(300, 600, 350, 50)
+add_platform(100, 500, 200, 50)
+add_platform(650, 450, 200, 50)
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
@@ -83,8 +83,7 @@ while True:
     """
     screen.fill(BLACK)  # Fill the screen with one colour
     
-    for platform in platforms:
-        pygame.draw.rect(screen, platform.color, platform.rect)
+    platforms.draw(screen)
 
     players.draw(screen)
 

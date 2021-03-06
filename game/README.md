@@ -19,3 +19,7 @@ For now, the player can walk straight through walls, we'll address that later.
 
 ## Session 4 - Updating the Player
 Replaced the player created in Session 3 with a player that inherits from the Pygame [sprite](https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Sprite) class.
+
+## Session 5 - Jumping Player & Colliding with Platforms
+**PRE-BUILT**: We have updated the [platform.py](platform.py) file before this session started! The new `platform.py` is now a sprite with an image (be sure to also download and add the [platform_tile.png](assets/platform_tile.png) image to your [assets](assets) folder). This `platform.py` sprite repeats the `platform_tile.png` image for any given width and height (best results when your `width` attribute is a multiple of your `height`). Note that the `color` attribute is no longer supported because an image is now being used.
+Make sure to download it and adjust the `platforms` variable in your [main.py](main.py) file to use [sprite groups](https://www.pygame.org/docs/ref/sprite.html#pygame.sprite.Group) instead of simple lists.
