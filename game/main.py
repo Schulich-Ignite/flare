@@ -55,13 +55,13 @@ while True:
     # Keyboard events
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
-        player.move(0, -player.move_speed)
+        player.jump()
     if keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
         player.move(-player.move_speed, 0)
     if keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
         player.move(player.move_speed, 0)
     if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
-        player.move(0, player.move_speed)
+        pass  # Now that we have platforms, there's no reason to make the player move down.
 
     # Mouse events
     mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
@@ -78,6 +78,10 @@ while True:
     """
     
     players.update()
+
+    hit_platforms = pygame.sprite.spritecollide(player, platforms, False)
+    for platform in hit_platforms:
+        player.on_platform_collide(platform)
 
     """
     DRAW section - make everything show up on screen
