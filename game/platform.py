@@ -42,6 +42,7 @@ class Platform(pygame.sprite.Sprite):
 
         # The self.image attribute expects a Surface, so we can manually create one and "blit" the tile image onto the surface (i.e. paint an image onto a surface).
         # We use list comprehension to quickly make the blits_data list of tuples (each tuple has the tile image, and the X and Y coordinates)
+        # Don't know what list comprehension is? Go look it up on the Internet. That's what all professional software engineers do ;)
         image = pygame.Surface((width, height))
         blits_data = [(tile_image, (tile_width * i, 0)) for i in range(math.ceil(width / tile_width))]
         image.blits(blits_data)

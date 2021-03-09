@@ -13,12 +13,16 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
 
         self.move_speed = 5
-        self.speed_y = 0
+        self.x_speed = 0
+        self.y_speed = 0
         self.gravity = 0.6
         
         self.can_jump = True
  
     def update(self):
+        # Move the player based on whatever the x_speed and y_speed are
+        self.move(self.x_speed, self.y_speed)
+        
         # Make the player fall due to gravity
         self.fall()
 
@@ -31,19 +35,18 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = y
 
     def fall(self):
-        self.move(0, self.speed_y)
-        self.speed_y += self.gravity
+        self.y_speed += self.gravity
 
     def jump(self):
         if not self.can_jump:
             return
-        self.speed_y = -15
+        self.y_speed = -15
         self.can_jump = False
 
     def on_platform_collide(self, platform):
         # Need to set self.rect.y explicitly to avoid having the player clip through the floor
-        # Note a new bug surfaces - players jumping from the underside will teleport to the top. This is left for students to solve if they want
+        # Note a new bug surfaces - players jumping from the underside will teleport to the top. This is left for students to solve if interested
         self.rect.y = platform.rect.y - self.rect.height
         
-        self.speed_y = 0
+        self.y_speed = 0
         self.can_jump = True

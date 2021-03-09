@@ -28,7 +28,7 @@ clock = pygame.time.Clock()
 # Platforms sprite group
 platforms = pygame.sprite.Group()
 
-# Add a platform to the platforms list
+# Add a platform to the platforms group
 def add_platform(x, y, width, height):
     p = Platform(x, y, width, height)
     platforms.add(p)
@@ -89,7 +89,6 @@ while True:
     screen.fill(BLACK)  # Fill the screen with one colour
     
     platforms.draw(screen)
-
     players.draw(screen)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
