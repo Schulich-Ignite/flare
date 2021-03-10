@@ -41,7 +41,6 @@ class Player(pygame.sprite.Sprite):
         if not self.can_jump:
             return
         self.y_speed = -15
-        self.can_jump = False
 
     def on_platform_collide(self, platform):
         # Need to set self.rect.y explicitly to avoid having the player clip through the floor

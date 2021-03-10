@@ -83,6 +83,9 @@ while True:
     for platform in hit_platforms:
         player.on_platform_collide(platform)
 
+    if len(hit_platforms) == 0:
+        player.can_jump = False
+
     """
     DRAW section - make everything show up on screen
     """
