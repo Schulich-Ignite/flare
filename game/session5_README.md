@@ -122,7 +122,7 @@ And let's change our keyboard events to call this `jump()` method. While we're h
 +       pass  # Now that we have platforms, there's no reason to make the player move down.
 ```
 
-## Colliding With the Platform, Part 1
+## Colliding With the Platform
 If you press the play button at this point, you'll notice your player plummet through the floor and sink all the way down to the center of the Earth (ouch, that's gotta be hot). It's time to fix that by adding collisions with our `Platform` sprite. We're going to check which platforms the player collided with by making the variable `hit_platfroms`. Then we're going to set the player's `y_speed` to zero to get our player to stop phasing through solid matter.
 I choose to put this code inside the `UPDATE` section of `main.py` because both the player and the platforms are interacting here, neither one "owns" this collision. Not a hard rule, just an opinion. I also chose to put this code after the existing `players.update()` line because the image is less jittery (fall first, then collide/set speed to zero).
 ```py
