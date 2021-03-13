@@ -28,15 +28,10 @@ clock = pygame.time.Clock()
 # Platforms sprite group
 platforms = pygame.sprite.Group()
 
-# Add a platform to the platforms group
-def add_platform(x, y, width, height):
-    p = Platform(x, y, width, height)
-    platforms.add(p)
-
-add_platform(300, 600, 350, 50)
-add_platform(100, 500, 200, 50)
-add_platform(650, 450, 200, 50)
-add_platform(700, 650, 200, 25)
+platforms.add(Platform(300, 600, 350, 50))
+platforms.add(Platform(100, 500, 200, 50))
+platforms.add(Platform(650, 450, 200, 50))
+platforms.add(Platform(700, 650, 200, 25))
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)

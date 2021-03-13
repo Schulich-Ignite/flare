@@ -31,7 +31,7 @@ class Platform(pygame.sprite.Sprite):
             width: The width of the output image in pixels
             height: The height of the output image in pixels
         
-        Returns
+        Returns:
             A surface representing the output image.
         """
         tile_image = pygame.image.load(image_location).convert_alpha()
