@@ -28,15 +28,10 @@ clock = pygame.time.Clock()
 # Platforms sprite group
 platforms = pygame.sprite.Group()
 
-# Add a platform to the platforms list
-def add_platform(x, y, width, height):
-    p = Platform(x, y, width, height)
-    platforms.add(p)
-
-add_platform(300, 600, 350, 50)
-add_platform(100, 500, 200, 50)
-add_platform(650, 450, 200, 50)
-add_platform(700, 650, 200, 25)
+platforms.add(Platform(300, 600, 350, 50))
+platforms.add(Platform(100, 500, 200, 50))
+platforms.add(Platform(650, 450, 200, 50))
+platforms.add(Platform(700, 650, 200, 25))
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
@@ -55,13 +50,13 @@ while True:
     # Keyboard events
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
-        player.move(0, -player.move_speed)
+        player.jump()
     if keys_pressed[pygame.K_LEFT] or keys_pressed[pygame.K_a]:
         player.move(-player.move_speed, 0)
     if keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
         player.move(player.move_speed, 0)
     if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
-        player.move(0, player.move_speed)
+        pass  # Now that we have platforms, there's no reason to make the player move down.
 
     # Mouse events
     mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
@@ -79,13 +74,19 @@ while True:
     
     players.update()
 
+    hit_platforms = pygame.sprite.spritecollide(player, platforms, False)
+    for platform in hit_platforms:
+        player.on_platform_collide(platform)
+
+    if len(hit_platforms) == 0:
+        player.can_jump = False
+
     """
     DRAW section - make everything show up on screen
     """
     screen.fill(BLACK)  # Fill the screen with one colour
     
     platforms.draw(screen)
-
     players.draw(screen)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
