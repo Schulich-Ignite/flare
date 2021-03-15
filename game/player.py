@@ -6,7 +6,9 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
 
         image_location = os.path.join("assets", "player.png")
-        self.image = pygame.image.load(image_location).convert_alpha()
+        self.walking_right_image = pygame.image.load(image_location).convert_alpha()
+        self.walking_left_image = pygame.transform.flip(self.walking_right_image, True, False)
+        self.image = self.walking_right_image
         self.rect = self.image.get_rect()
 
         self.rect.x = x
@@ -30,6 +32,11 @@ class Player(pygame.sprite.Sprite):
         self.rect.x += x_change
         self.rect.y += y_change 
         
+        if x_change > 0:
+            self.image = self.walking_right_image
+        elif x_change < 0:
+            self.image = self.walking_left_image
+
     def teleport(self, x, y):
         self.rect.x = x
         self.rect.y = y
