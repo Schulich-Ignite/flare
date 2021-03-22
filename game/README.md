@@ -28,3 +28,6 @@ Make sure to download the new file. You will need to also adjust the `platforms`
 
 ### In-class
 **Click on [session5_README.md](session5_README.md) for a full explanation of this week.** Gave the player gravity and the ability to jump. The player cannot jump in mid-air and can land on platforms.
+
+## Session 6 - Enemies
+During class, we worked on the [enemy.py](enemy.py) file, which includes walking and colliding with the player. Students started branching off and building their own games at this point, but we will continue to upload code taught in sessions that is useful to the game.

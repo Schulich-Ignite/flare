@@ -5,6 +5,7 @@ import os
 import pygame
 from platform import Platform
 from player import Player
+from enemy import Enemy
 
 """
 SETUP section - preparing everything before the main loop runs
@@ -30,8 +31,11 @@ platforms = pygame.sprite.Group()
 
 platforms.add(Platform(300, 600, 350, 50))
 platforms.add(Platform(100, 500, 200, 50))
-platforms.add(Platform(650, 450, 200, 50))
+platforms.add(Platform(650, 450, 250, 50))
 platforms.add(Platform(700, 650, 200, 25))
+
+enemies = pygame.sprite.Group()
+enemies.add(Enemy(750, 410))
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
@@ -73,13 +77,25 @@ while True:
     """
     
     players.update()
+    enemies.update()
 
+    # Handle collisions with platforms
     hit_platforms = pygame.sprite.spritecollide(player, platforms, False)
     for platform in hit_platforms:
         player.on_platform_collide(platform)
 
     if len(hit_platforms) == 0:
         player.can_jump = False
+
+
+    # Handle collisions with enemies
+    hit_enemies = pygame.sprite.spritecollide(player, enemies, False)
+    for enemy in hit_enemies:
+        # Check if collision is from "above", with 10 pixels margin of error
+        if player.rect.y + player.rect.height < enemy.rect.y + 10:
+            enemy.kill()
+        else:
+            player.kill()
 
     """
     DRAW section - make everything show up on screen
@@ -88,6 +104,7 @@ while True:
     
     platforms.draw(screen)
     players.draw(screen)
+    enemies.draw(screen)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
