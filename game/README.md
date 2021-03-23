@@ -31,3 +31,10 @@ Make sure to download the new file. You will need to also adjust the `platforms`
 
 ## Session 6 - Enemies
 During class, we worked on the [enemy.py](enemy.py) file, which includes walking and colliding with the player. Students started branching off and building their own games at this point, but we will continue to upload code taught in sessions that is useful to the game.
+
+## Session 7 - Bonus Topics (Levels and Bullets)
+### In-class
+During class, we worked on the [level.py](level.py) file, added the [bullet.py](bullet.py) file and modified the player to shoot bullets.
+
+### After-class
+**Click on [session7_README.md](session7_README.md) for a full explanation the features added after class.** Because of some bugs and some confusion caused during the session, we have added some additional code to make the game more robust.

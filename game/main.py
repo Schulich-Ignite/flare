@@ -29,6 +29,7 @@ clock = pygame.time.Clock()
 
 # List of all levels
 # Each level has a list of platforms and a list of enemies
+# Each level has an optional third parameter called player_spawn that sets where the player will first appear
 levels = [
     # Level 0
     Level([
@@ -69,7 +70,7 @@ levels = [
 level = levels[0]
 
 # Start the next level
-def next_level(player):
+def next_level(levels, player):
     """
     Start the next level from the list of levels
 
@@ -156,7 +157,7 @@ while True:
 
     # When all the enemies are defeated in a level, start the next level
     if len(level.enemies) == 0:
-        level = next_level(player)
+        level = next_level(levels, player)
 
     """
     DRAW section - make everything show up on screen
