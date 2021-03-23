@@ -36,6 +36,5 @@ class Bullet(pygame.sprite.Sprite):
         Delete all bullets that are off the left or right edge of the screen.
         This is to save on computer resources after the player shoots a large number of bullets.
         """
-        if self.rect.x - self.rect.width < 0 or self.rect.x > 1000:
+        if self.rect.x + self.rect.width < 0 or self.rect.x > 1000:
             self.kill()
-            

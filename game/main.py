@@ -70,7 +70,7 @@ levels = [
 level = levels[0]
 
 # Start the next level
-def next_level(levels, player):
+def next_level(level, levels, player):
     """
     Start the next level from the list of levels
 
@@ -157,7 +157,7 @@ while True:
 
     # When all the enemies are defeated in a level, start the next level
     if len(level.enemies) == 0:
-        level = next_level(levels, player)
+        level = next_level(level, levels, player)
 
     """
     DRAW section - make everything show up on screen

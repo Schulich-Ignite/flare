@@ -73,6 +73,7 @@ class Player(pygame.sprite.Sprite):
         if time - self.last_bullet_time < self.bullet_cooldown:
             return  # Not enough time has elapsed since the last bullet, escape early
 
+        # Set initial values for bullet_x, bullet_y, and bullet_x_speed
         bullet_x = 0
         bullet_y = self.rect.y + self.rect.height / 2
         bullet_x_speed = 0
