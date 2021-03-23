@@ -1,5 +1,6 @@
 import os
 import pygame
+from bullet import Bullet
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -20,7 +21,14 @@ class Player(pygame.sprite.Sprite):
         self.gravity = 0.6
         
         self.can_jump = True
- 
+
+        self.direction = "right"
+
+        self.bullets = pygame.sprite.Group()
+        self.bullet_cooldown = 500
+        self.last_bullet_time = -99999
+
+
     def update(self):
         # Move the player based on whatever the x_speed and y_speed are
         self.move(self.x_speed, self.y_speed)
@@ -33,8 +41,10 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += y_change 
         
         if x_change > 0:
+            self.direction = "right"
             self.image = self.walking_right_image
         elif x_change < 0:
+            self.direction = "left"
             self.image = self.walking_left_image
 
     def teleport(self, x, y):
@@ -56,3 +66,26 @@ class Player(pygame.sprite.Sprite):
         
         self.y_speed = 0
         self.can_jump = True
+
+    def create_new_bullet(self, level):
+        # Check if the last time a bullet was shot was lesser than the bullet cooldown time
+        time = pygame.time.get_ticks()
+        if time - self.last_bullet_time < self.bullet_cooldown:
+            return  # Not enough time has elapsed since the last bullet, escape early
+
+        bullet_x = 0
+        bullet_y = self.rect.y + self.rect.height / 2
+        bullet_x_speed = 0
+        
+        if self.direction == "right":
+            bullet_x = self.rect.x + self.rect.width
+            bullet_x_speed = 5
+        else:
+            bullet_x = self.rect.x
+            bullet_x_speed = -5
+
+        # Create a bullet and add it to the player's bullet group
+        self.bullets.add(Bullet(bullet_x, bullet_y, bullet_x_speed, level))
+
+        # Set the last bullet time to the time the latest bullet was fired
+        self.last_bullet_time = time

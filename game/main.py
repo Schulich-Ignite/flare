@@ -6,6 +6,7 @@ import pygame
 from platform import Platform
 from player import Player
 from enemy import Enemy
+from level import Level
 
 """
 SETUP section - preparing everything before the main loop runs
@@ -26,21 +27,73 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 screen.set_alpha(0)  # Make alpha bits transparent
 clock = pygame.time.Clock()
 
-# Platforms sprite group
-platforms = pygame.sprite.Group()
+# List of all levels
+# Each level has a list of platforms and a list of enemies
+levels = [
+    # Level 0
+    Level([
+        Platform(300, 600, 350, 50),
+        Platform(100, 500, 200, 50),
+        Platform(650, 450, 250, 50),
+        Platform(700, 650, 200, 25)
+    ], [
+        Enemy(750, 410)
+    ], (400, 500)),
+    # Level 1
+    Level([
+        Platform(250, 600, 400, 50),
+        Platform(100, 700, 200, 50),
+        Platform(650, 300, 250, 50),
+        Platform(700, 650, 200, 25),
+        Platform(500, 450, 100, 25)
+    ], [
+        Enemy(750, 260),
+        Enemy(150, 660),
+    ], (400, 500)),
+    # Level 2
+    Level([
+        Platform(50, 750, 350, 25),
+        Platform(500, 700, 200, 50),
+        Platform(700, 600, 150, 25),
+        Platform(425, 400, 200, 25),
+        Platform(150, 350, 200, 50)
+    ], [
+        Enemy(600, 660),
+        Enemy(750, 560),
+        Enemy(500, 360),
+        Enemy(200, 310)
+    ], (100, 650))
+]
 
-platforms.add(Platform(300, 600, 350, 50))
-platforms.add(Platform(100, 500, 200, 50))
-platforms.add(Platform(650, 450, 250, 50))
-platforms.add(Platform(700, 650, 200, 25))
+# Set the current level to be the first level in the game
+level = levels[0]
 
-enemies = pygame.sprite.Group()
-enemies.add(Enemy(750, 410))
+# Start the next level
+def next_level(player):
+    """
+    Start the next level from the list of levels
+
+    Args:
+        player: The player to reset
+    """
+
+    # Get the next level by getting the index of the current level and adding one
+    # Note there's a new bug: When the last level is finished, the next level doesn't exist
+    new_level_index = levels.index(level) + 1
+    new_level = levels[new_level_index]
+
+    # Start the next level
+    new_level.start(player)
+
+    # Return the next level so that the current level can be set to the next level
+    return new_level
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
 players = pygame.sprite.Group()
 players.add(player)
+
+level.start(player)
 
 while True:
     """
@@ -62,6 +115,9 @@ while True:
     if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
         pass  # Now that we have platforms, there's no reason to make the player move down.
 
+    if keys_pressed[pygame.K_SPACE]:
+        player.create_new_bullet(level)
+
     # Mouse events
     mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
     # (x, y) coordinate
@@ -77,10 +133,11 @@ while True:
     """
     
     players.update()
-    enemies.update()
-
+    level.enemies.update()
+    player.bullets.update()
+    
     # Handle collisions with platforms
-    hit_platforms = pygame.sprite.spritecollide(player, platforms, False)
+    hit_platforms = pygame.sprite.spritecollide(player, level.platforms, False)
     for platform in hit_platforms:
         player.on_platform_collide(platform)
 
@@ -89,22 +146,27 @@ while True:
 
 
     # Handle collisions with enemies
-    hit_enemies = pygame.sprite.spritecollide(player, enemies, False)
+    hit_enemies = pygame.sprite.spritecollide(player, level.enemies, False)
     for enemy in hit_enemies:
-        # Check if collision is from "above", with 10 pixels margin of error
-        if player.rect.y + player.rect.height < enemy.rect.y + 10:
+        # Check if collision is from "above", with 15 pixels margin of error
+        if player.rect.y + player.rect.height < enemy.rect.y + 15:
             enemy.kill()
         else:
             player.kill()
+
+    # When all the enemies are defeated in a level, start the next level
+    if len(level.enemies) == 0:
+        level = next_level(player)
 
     """
     DRAW section - make everything show up on screen
     """
     screen.fill(BLACK)  # Fill the screen with one colour
     
-    platforms.draw(screen)
+    level.platforms.draw(screen)
     players.draw(screen)
-    enemies.draw(screen)
+    level.enemies.draw(screen)
+    player.bullets.draw(screen)
 
     pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
     clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
