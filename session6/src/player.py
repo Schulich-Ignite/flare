@@ -11,9 +11,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.x_speed = 5  # speed in the x direction
         self.y_speed = 0  # speed in the y direction
-        image_location = os.path.join(
-            "assets", "player.png"
-        )  # find the path of the player image
+        image_location = os.path.join("assets", "player.png")  # Find the path of the player image
         self.image = pygame.image.load(image_location).convert_alpha()  # load the image
         self.rect = self.image.get_rect()  # get the rect of the image
         self.rect.x = 400  # have the player start at 400 on x axis
@@ -26,7 +24,6 @@ class Player(pygame.sprite.Sprite):
 
         # Setup
 
-        print("y speed: " + str(self.y_speed))
         # Events -> move these in from the main loop
 
         # Get input
