@@ -22,19 +22,23 @@ class Player(pygame.sprite.Sprite):
         # Physics       
         self.jump_cooldown = 0  # the player can jump right away!
         # speed (change in position per tick)
-        self.x_speed = 5  # speed in the x direction
-        self.y_speed = 0  # speed in the y direction
+        self.x_speed = 5  # speed in the x direction (must be greater than 0, or you won't move!)
+        self.y_speed = 0  # speed in the y direction 
 
     # how do we want to implement the other actions?
 
     # Parameters:
     #   - keyspressed - result of pygame.key.get_pressed(), passed in from main
-    def update(self, keys_pressed):
+    def update(self, keys_pressed, mouse_buttons, mouse_pos):
 
         # If you want, feel free to seperate the sections out into different methods.
         # I prefer to keep it all together so you don't have to worry about how it fits together.
 
         # SETUP  -------------------------------------
+
+        teleport = False # must reset to False, or else the player will keep teleporting to the cursor after the first click
+        direction = [0, 0] # direction for this frame
+
         # End of SETUP
 
         # EVENTS -------------------------------------
@@ -42,8 +46,15 @@ class Player(pygame.sprite.Sprite):
         # Recall: keys_pressed is passed to us from the main loop
         # You can check for keys pressed as usual!
 
+
+        # Check if the player needs to teleport
+        if mouse_buttons[0]:  # If left mouse pressed
+            teleport = True  # Replace this line
+        if mouse_buttons[2]:  # If right mouse pressed
+            teleport = True  # Replace this line
+
         # Reset direction so that the player stops moving when keys not pressed
-        direction = [0, 0]
+
         if keys_pressed[pygame.K_UP]:
             direction[1] = -1  # y direction goes up
         if keys_pressed[pygame.K_DOWN]:
@@ -60,8 +71,18 @@ class Player(pygame.sprite.Sprite):
                 self.jump_cooldown = 30  # Reset the cooldown to 30 frames
                 self.y_speed += JUMP_VELOCITY  # Add velocity for the jump (must be greater than gravity to work properly)
         
+        # Set teleport to True if we need to call teleport() in update!
+        if mouse_buttons[0]:  # If left mouse pressed
+            teleport = True  
+        if mouse_buttons[2]:  # If right mouse pressed
+            teleport = True
+
         # End of EVENTS
         # UPDATES ------------------------------------
+
+        # Check if we need to teleport
+        if teleport:
+            self.teleport(mouse_pos) # if True, teleport to mouse position
 
         self.rect.x += direction[0] * self.x_speed
         # self.rect.y += direction[1] * self.speed

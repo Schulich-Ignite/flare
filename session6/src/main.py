@@ -43,15 +43,10 @@ players = pygame.sprite.Group()
 # Add the player to the sprite group
 player.add(players)
 
-teleport = False
-
-
 while True:
     """
     EVENTS section - how the code reacts when users do things
     """
-
-    teleport = False # must reset to False, or else the player will keep teleporting to the cursor after the first click
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
@@ -61,6 +56,7 @@ while True:
     # Keyboard events
     keys_pressed = pygame.key.get_pressed()
 
+    # Examples of how to get key input 
     if keys_pressed[pygame.K_a]:
         print("Letter pressed")
     if keys_pressed[pygame.K_1]:
@@ -71,10 +67,6 @@ while True:
     mouse_pos = pygame.mouse.get_pos()
 
     mouse_buttons = pygame.mouse.get_pressed()
-    if mouse_buttons[0]:  # If left mouse pressed
-        teleport = True  # Replace this line
-    if mouse_buttons[2]:  # If right mouse pressed
-        teleport = True  # Replace this line
 
     """
     UPDATE section - manipulate everything on the screen
@@ -87,11 +79,7 @@ while True:
             player.rect.y = platform.rect.y - player.rect.height  # make sure they aren't "stuck" in a platform
 
     # Update the player
-    player.update(keys_pressed)
-
-    # Teleport to mouse click
-    if teleport:
-        player.teleport(mouse_pos)
+    player.update(keys_pressed, mouse_buttons, mouse_pos)
 
     """
     DRAW section - make everything show up on screen
