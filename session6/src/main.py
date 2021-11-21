@@ -33,7 +33,7 @@ platform2 = Platform(600, 600, 200, 50)
 # Create a sprite group for the platforms
 platforms = pygame.sprite.Group()
 # Add the platforms to the sprite group
-platforms.add(platform, platform1)
+platforms.add(platform1, platform2)
 
 # Initialize the player
 player = Player()
@@ -50,6 +50,9 @@ while True:
     """
     EVENTS section - how the code reacts when users do things
     """
+
+    teleport = False # must reset to False, or else the player will keep teleporting to the cursor after the first click
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
             pygame.quit()
@@ -57,8 +60,6 @@ while True:
 
     # Keyboard events
     keys_pressed = pygame.key.get_pressed()
-
-    teleport = False
 
     if keys_pressed[pygame.K_a]:
         print("Letter pressed")
