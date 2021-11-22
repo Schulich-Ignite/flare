@@ -12,32 +12,35 @@ class Player(pygame.sprite.Sprite):
 
         # Load the player image, set class rectangle to that of the image
         image_location = os.path.join("assets", "player.png")  # Find the path of the player image
-        self.image = pygame.image.load(image_location).convert_alpha()  # load the image
-        self.rect = self.image.get_rect()  # get the rect of the image
+        self.image = pygame.image.load(image_location).convert_alpha()  # Load the image
+        self.rect = self.image.get_rect()  # Get the rect of the image
         
-        # Set the initial position of the player
-        self.rect.x = 400  # have the player start at 400 on x axis
-        self.rect.y = 0 # this is initialized for us (self.image.get_rect()), but you can change it if you want
+        # Set the initial position of the player at (400, 600), just above a platform
+        self.rect.x = 400
+        self.rect.y = 600
+
+        # Speed (change in position per tick)
+        self.x_speed = 5  # Walking speed in the x direction (must be greater than 0, or you won't move!)
+        self.y_speed = 0  # Walking Speed in the y direction 
 
         # Physics       
-        self.jump_cooldown = 0  # the player can jump right away!
-        # speed (change in position per tick)
-        self.x_speed = 5  # speed in the x direction (must be greater than 0, or you won't move!)
-        self.y_speed = 0  # speed in the y direction 
+        self.jump_cooldown = 0  # The player can jump right away!
 
-    # how do we want to implement the other actions?
-
-    # Parameters:
-    #   - keyspressed - result of pygame.key.get_pressed(), passed in from main
     def update(self, keys_pressed, mouse_buttons, mouse_pos):
+        """
+        Update the player
+
+        Args:
+            keyspressed: Result of pygame.key.get_pressed(), passed in from main
+        """
 
         # If you want, feel free to seperate the sections out into different methods.
         # I prefer to keep it all together so you don't have to worry about how it fits together.
 
         # SETUP  -------------------------------------
 
-        teleport = False # must reset to False, or else the player will keep teleporting to the cursor after the first click
-        direction = [0, 0] # direction for this frame
+        teleport = False  # Must reset to False, or else the player will keep teleporting to the cursor after the first click
+        direction = [0, 0]  # Reset direction so that the player stops moving when keys not pressed
 
         # End of SETUP
 
@@ -45,14 +48,6 @@ class Player(pygame.sprite.Sprite):
 
         # Recall: keys_pressed is passed to us from the main loop
         # You can check for keys pressed as usual!
-
-
-        # Check if the player needs to teleport
-        if mouse_buttons[0]:  # If left mouse pressed
-            teleport = True  # Replace this line
-        if mouse_buttons[2]:  # If right mouse pressed
-            teleport = True  # Replace this line
-
         # Reset direction so that the player stops moving when keys not pressed
 
         if keys_pressed[pygame.K_UP]:
@@ -92,7 +87,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.y += self.y_speed  # Add speed to position
 
         # If jump_cooldown is >= 1, subtract by 1 to lower the cooldown
-        # this happens every frame, so jump_cooldown is the number of frames 
+        # This happens every frame, so jump_cooldown is the number of frames 
         # the player must wait to jump again after jumping.
         # When jump_cooldown is 0, we can jump again!
         if self.jump_cooldown > 0:
@@ -100,10 +95,13 @@ class Player(pygame.sprite.Sprite):
 
         # End of updates
 
-    # Teleport to mouse position
-    # Parameters:  
-    #   - mousepos - the position of the mouse (passed in from main)
     def teleport(self, mousepos):
+        """
+        Teleport to mouse position
+
+        Args:
+            mousepos: The position of the mouse as a tuple representing (x, y), passed in from main
+        """
         x = mousepos[0]
         y = mousepos[1]
         self.rect.x = x

@@ -75,8 +75,8 @@ while True:
     # Stop the player if they hit a platform!
     for platform in platforms:
         if pygame.sprite.collide_rect(player, platform):
-            player.y_speed = 0  # change their y speed to 0
-            player.rect.y = platform.rect.y - player.rect.height  # make sure they aren't "stuck" in a platform
+            player.y_speed = 0  # Change their y speed to 0
+            player.rect.y = platform.rect.y - player.rect.height  # Make sure they aren't "stuck" in a platform
 
     # Update the player
     player.update(keys_pressed, mouse_buttons, mouse_pos)
