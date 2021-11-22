@@ -18,7 +18,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
 FRAME_RATE = 60
 
-# Useful colors 
+# Useful colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
@@ -70,24 +70,19 @@ levels = [
 level = levels[0]
 
 # Start the next level
-def next_level(level, levels, player):
+
+
+def next_level(level, levels):
     """
     Start the next level from the list of levels
-
-    Args:
-        player: The player to reset
     """
 
     # Get the next level by getting the index of the current level and adding one
     # Note there's a new bug: When the last level is finished, the next level doesn't exist
     new_level_index = levels.index(level) + 1
     new_level = levels[new_level_index]
-
-    # Start the next level
-    new_level.start(player)
-
-    # Return the next level so that the current level can be set to the next level
     return new_level
+
 
 # Create the player sprite and add it to the players sprite group
 player = Player(400, 500)
@@ -104,7 +99,7 @@ while True:
         if event.type == pygame.QUIT:  # When user clicks the 'x' on the window, close our game
             pygame.quit()
             sys.exit()
-        
+
     # Keyboard events
     keys_pressed = pygame.key.get_pressed()
     if keys_pressed[pygame.K_UP] or keys_pressed[pygame.K_w]:
@@ -114,13 +109,15 @@ while True:
     if keys_pressed[pygame.K_RIGHT] or keys_pressed[pygame.K_d]:
         player.move(player.move_speed, 0)
     if keys_pressed[pygame.K_DOWN] or keys_pressed[pygame.K_s]:
-        pass  # Now that we have platforms, there's no reason to make the player move down.
+        # Now that we have platforms, there's no reason to make the player move down.
+        pass
 
     if keys_pressed[pygame.K_SPACE]:
         player.create_new_bullet(level)
 
     # Mouse events
-    mouse_pos = pygame.mouse.get_pos()  # Get position of mouse as a tuple representing the
+    # Get position of mouse as a tuple representing the
+    mouse_pos = pygame.mouse.get_pos()
     # (x, y) coordinate
 
     mouse_buttons = pygame.mouse.get_pressed()
@@ -132,11 +129,11 @@ while True:
     """
     UPDATE section - manipulate everything on the screen
     """
-    
+
     players.update()
     level.enemies.update()
     player.bullets.update()
-    
+
     # Handle collisions with platforms
     hit_platforms = pygame.sprite.spritecollide(player, level.platforms, False)
     for platform in hit_platforms:
@@ -144,7 +141,6 @@ while True:
 
     if len(hit_platforms) == 0:
         player.can_jump = False
-
 
     # Handle collisions with enemies
     hit_enemies = pygame.sprite.spritecollide(player, level.enemies, False)
@@ -157,18 +153,19 @@ while True:
 
     # When all the enemies are defeated in a level, start the next level
     if len(level.enemies) == 0:
-        level = next_level(level, levels, player)
+        level = next_level(level, levels)
 
     """
     DRAW section - make everything show up on screen
     """
     screen.fill(BLACK)  # Fill the screen with one colour
-    
+
     level.platforms.draw(screen)
     players.draw(screen)
     level.enemies.draw(screen)
     player.bullets.draw(screen)
 
-    pygame.display.flip()  # Pygame uses a double-buffer, without this we see half-completed frames
-    clock.tick(FRAME_RATE)  # Pause the clock to always maintain FRAME_RATE frames per second
-    
+    # Pygame uses a double-buffer, without this we see half-completed frames
+    pygame.display.flip()
+    # Pause the clock to always maintain FRAME_RATE frames per second
+    clock.tick(FRAME_RATE)
