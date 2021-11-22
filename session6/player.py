@@ -20,8 +20,8 @@ class Player(pygame.sprite.Sprite):
         self.rect.y = 600
 
         # Speed (change in position per tick)
-        self.x_speed = 5  # Walking speed in the x direction (must be greater than 0, or you won't move!)
-        self.y_speed = 0  # Walking Speed in the y direction 
+        self.x_speed = 5  # Movement speed in the x direction (must be greater than 0, or you won't move!)
+        self.y_speed = 0  # Movement speed in the y direction 
 
         # Physics       
         self.jump_cooldown = 0  # The player can jump right away!
