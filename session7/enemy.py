@@ -3,7 +3,7 @@ import pygame
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, x, y):
         super().__init__()
 
         image_location = os.path.join("assets", "enemy.png")
@@ -12,8 +12,8 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         # Set the x and y values of the image
-        self.rect.x = 300
-        self.rect.y = 700 - self.rect.height
+        self.rect.x = x
+        self.rect.y = y
 
         # Make the player start nice and slow
         self.x_speed = 1
