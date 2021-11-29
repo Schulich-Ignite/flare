@@ -1,8 +1,6 @@
 import sys
 import pygame
-
 from platform import Platform
-
 from player import Player
 from enemy import Enemy
 
@@ -37,7 +35,8 @@ platforms = pygame.sprite.Group()
 platforms.add(platform1, platform2)
 
 # Initialize the player
-player = Player()
+# Set the initial position of the player at (400, 600), just above a platform
+player = Player(400, 600)
 
 # Create a sprite group for the player
 players = pygame.sprite.Group()
