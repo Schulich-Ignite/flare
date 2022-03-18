@@ -23,9 +23,6 @@ class Player(pygame.sprite.Sprite):
         self.x_speed = 5  # Movement speed in the x direction (must be greater than 0, or you won't move!)
         self.y_speed = 0  # Movement speed in the y direction 
 
-        # Physics       
-        self.jump_cooldown = 0  # The player can jump right away!
-
     def update(self, keys_pressed, mouse_buttons, mouse_pos):
         """
         Update the player
@@ -62,9 +59,7 @@ class Player(pygame.sprite.Sprite):
         # Handle jump events
         if keys_pressed[pygame.K_SPACE]:
             # This will run if SPACE is pressed
-            if self.jump_cooldown == 0:  # This will run if jump_cooldown is 0
-                self.jump_cooldown = 30  # Reset the cooldown to 30 frames
-                self.y_speed += JUMP_VELOCITY  # Add velocity for the jump (must be greater than gravity to work properly)
+            self.y_speed += JUMP_VELOCITY  # Add velocity for the jump (must be greater than gravity to work properly)
         
         # Set teleport to True if we need to call teleport() in update!
         if mouse_buttons[0]:  # If left mouse pressed
@@ -85,13 +80,6 @@ class Player(pygame.sprite.Sprite):
 
         self.y_speed += GRAVITY  # Add gravity to y_speed
         self.rect.y += self.y_speed  # Add speed to position
-
-        # If jump_cooldown is >= 1, subtract by 1 to lower the cooldown
-        # This happens every frame, so jump_cooldown is the number of frames 
-        # the player must wait to jump again after jumping.
-        # When jump_cooldown is 0, we can jump again!
-        if self.jump_cooldown > 0:
-            self.jump_cooldown -= 1
 
         # End of updates
 
